@@ -39,8 +39,8 @@ $wgResourceBasePath = $wgScriptPath;
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
-	'1x' => "$wgResourceBasePath/images/logo.jpeg",
-	'icon' => "$wgResourceBasePath/images/logo.jpeg",
+	'1x' => "$wgResourceBasePath/images/logo.png",
+	'icon' => "$wgResourceBasePath/images/logo.png",
 ];
 
 ## UPO means: this is also a user preference option
@@ -195,3 +195,10 @@ $wgFileExtensions = array_merge(
     ['ogg', 'oga', 'ogv', 'mp3', 'wav', 'flac', 'opus', 'webm']
 );
 wfLoadExtension( 'TimedMediaHandler' );
+
+# Fiction namespace for fictional or made up content
+define('NS_FICTION', 16);
+define('NS_FICTION_TALK', 17);
+
+$wgExtraNamespaces[NS_FICTION] = "Fiction";
+$wgExtraNamespaces[NS_FICTION_TALK] = "Fiction_talk";
