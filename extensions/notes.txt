@@ -26,3 +26,5 @@
 * ReplaceText
 * SpamBlacklist
 * Scribunto
+* TemplateStyles
+* PdfHandler
