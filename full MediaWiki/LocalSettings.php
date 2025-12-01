@@ -202,3 +202,25 @@ define('NS_FICTION_TALK', 17);
 
 $wgExtraNamespaces[NS_FICTION] = "Fiction";
 $wgExtraNamespaces[NS_FICTION_TALK] = "Fiction_talk";
+
+# Extended confirmed group:
+# Define the extended confirmed user group
+$wgGroupPermissions['extendedconfirmed']['extendedconfirmed'] = true;
+# Set autopromote conditions: 30 days and 500 edits + one edit after that
+$wgAutopromote['extendedconfirmed'] = [
+    '&',
+    [ APCOND_EDITCOUNT, 501 ],
+    [ APCOND_AGE, 2592000 ], // 30 days in seconds
+];
+# Core permission grants
+$wgGroupPermissions['sysop']['autoconfirmed'] = true;
+$wgGroupPermissions['sysop']['extendedconfirmed'] = true;
+
+$wgGroupPermissions['bot']['autoconfirmed'] = true;
+$wgGroupPermissions['bot']['extendedconfirmed'] = true;
+# Allow bureaucrats to grant/revoke extended confirmed
+$wgAddGroups['bureaucrat'][] = 'extendedconfirmed';
+$wgRemoveGroups['bureaucrat'][] = 'extendedconfirmed';
+# Note: Also create "MediaWiki:Group-extendedconfirmed" with the content "Extended confirmed users"
+# and "MediaWiki:Group-extendedconfirmed-member" with the content "extended confirmed"
+
