@@ -28,10 +28,10 @@ $wgSitename = "Kryptionary";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "/kryptionary";
+$wgScriptPath = getenv('MW_SCRIPT_PATH') ?: "/kryptionary";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost:8888";
+$wgServer = getenv('MW_SERVER') ?: "http://localhost:8888";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -57,14 +57,14 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = "localhost:8889";
-$wgDBname = "kryptionary_db";
-$wgDBuser = "root";
-$wgDBpassword = "root";
+$wgDBserver = getenv('MYSQLHOST') ? getenv('MYSQLHOST') . ':' . getenv('MYSQLPORT') : "localhost:8889";
+$wgDBname = getenv('MYSQLDATABASE') ?: "kryptionary_db";
+$wgDBuser = getenv('MYSQLUSER') ?: "root";
+$wgDBpassword = getenv('MYSQLPASSWORD') ?: "root";
 
 # MySQL specific settings
 $wgDBprefix = "";
-$wgDBssl = false;
+$wgDBssl = (bool) getenv('MYSQLHOST'); # Enable SSL for Railway
 
 # MySQL table options to use during installation or update
 $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
@@ -80,8 +80,8 @@ $wgMemCachedServers = [];
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
 $wgEnableUploads = true;
-#$wgUseImageMagick = true;
-#$wgImageMagickConvertCommand = "/usr/bin/convert";
+$wgUseImageMagick = true;
+$wgImageMagickConvertCommand = "/usr/bin/convert";
 
 # InstantCommons allows wiki to use images from https://commons.wikimedia.org
 $wgUseInstantCommons = true;
@@ -102,7 +102,7 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "46f8c50ebeebb5a309f81b4fbcf0f8038da25a28181357d8cb191670e165952d";
+$wgSecretKey = getenv('MW_SECRET_KEY') ?: "46f8c50ebeebb5a309f81b4fbcf0f8038da25a28181357d8cb191670e165952d";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
