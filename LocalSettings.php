@@ -229,8 +229,6 @@ $wgGroupPermissions['bot']['extendedconfirmed'] = true;
 # Allow bureaucrats to grant/revoke extended confirmed
 $wgAddGroups['bureaucrat'][] = 'extendedconfirmed';
 $wgRemoveGroups['bureaucrat'][] = 'extendedconfirmed';
-# Note: Also create "MediaWiki:Group-extendedconfirmed" with the content "Extended confirmed users"
-# and "MediaWiki:Group-extendedconfirmed-member" with the content "extended confirmed"
 
 # Make extended confirmed available as a protection level
 $wgRestrictionLevels[] = 'extendedconfirmed';
