@@ -237,5 +237,12 @@ $wgRestrictionLevels = [ '', 'autoconfirmed', 'extendedconfirmed', 'sysop' ];
 # Enable temporary accounts for logged-out users (IP masking)
 $wgAutoCreateTempUser = [
     'enabled' => true,
+    'actions' => [ 'edit' ],
+    'genPattern' => '~$1',
+    'serialProvider' => [
+        'type' => 'local',
+        'useYear' => true,
+    ],
+    'serialMapping' => [],
 ];
 
