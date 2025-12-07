@@ -33,13 +33,16 @@ $wgSitename = "Kryptionary";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = getenv('MW_SCRIPT_PATH') ?: "/kryptionary";
+$wgScriptPath = getenv('MW_SCRIPT_PATH') !== false ? getenv('MW_SCRIPT_PATH') : "/kryptionary";
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = getenv('MW_SERVER') ?: "http://localhost:8888";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
+
+## Article path - must start with / when script path is empty
+$wgArticlePath = $wgScriptPath ? "$wgScriptPath/index.php/$1" : "/index.php/$1";
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
@@ -62,7 +65,7 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = getenv('MYSQLHOST') ? getenv('MYSQLHOST') . ':' . getenv('MYSQLPORT') : "localhost:8889";
+$wgDBserver = getenv('MYSQLHOST') ?: "localhost:8889";
 $wgDBname = getenv('MYSQLDATABASE') ?: "kryptionary_db";
 $wgDBuser = getenv('MYSQLUSER') ?: "root";
 $wgDBpassword = getenv('MYSQLPASSWORD') ?: "root";
