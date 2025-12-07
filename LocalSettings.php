@@ -234,3 +234,8 @@ $wgRemoveGroups['bureaucrat'][] = 'extendedconfirmed';
 # Order: all users, autoconfirmed, extended confirmed, sysop
 $wgRestrictionLevels = [ '', 'autoconfirmed', 'extendedconfirmed', 'sysop' ];
 
+# Enable temporary accounts for logged-out users (IP masking)
+$wgAutoCreateTempUser = [
+    'enabled' => true,
+];
+
