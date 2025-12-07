@@ -231,5 +231,6 @@ $wgAddGroups['bureaucrat'][] = 'extendedconfirmed';
 $wgRemoveGroups['bureaucrat'][] = 'extendedconfirmed';
 
 # Make extended confirmed available as a protection level
-$wgRestrictionLevels[] = 'extendedconfirmed';
+# Order: all users, autoconfirmed, extended confirmed, sysop
+$wgRestrictionLevels = [ '', 'autoconfirmed', 'extendedconfirmed', 'sysop' ];
 
