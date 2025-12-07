@@ -197,10 +197,10 @@ $wgGroupPermissions['observers']['viewsuppressed'] = true;
 # Namespace aliases
 $wgNamespaceAliases['KT'] = NS_PROJECT;
 
-# Remove the limitations of only supporting images as well as adding .svg format support
+# Remove the limitations of only supporting images
 $wgFileExtensions = array_merge(
     $wgFileExtensions,
-    ['ogg', 'oga', 'ogv', 'mp3', 'wav', 'flac', 'opus', 'webm', 'svg']
+    ['ogg', 'oga', 'ogv', 'mp3', 'wav', 'flac', 'opus', 'webm']
 );
 wfLoadExtension( 'TimedMediaHandler' );
 
