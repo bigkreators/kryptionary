@@ -65,4 +65,10 @@ RUN echo "upload_max_filesize = 100M" >> "$PHP_INI_DIR/php.ini" \
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+# Startup script to configure PORT at runtime
+RUN echo '#!/bin/bash\n\
+sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/ports.conf\n\
+sed -i "s/:80/:${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf\n\
+exec apache2-foreground' > /start.sh && chmod +x /start.sh
+
+CMD ["/start.sh"]
