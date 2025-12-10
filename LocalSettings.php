@@ -244,8 +244,9 @@ $wgAutoCreateTempUser = [
         'useYear' => true,
     ],
     'serialMapping' => [
-        'type' => 'plain-numeric',  // or 'readable-numeric'
+        'type' => 'plain-numeric',
     ],
-    'expireAfterDays' => null,
+    'expireAfterDays' => 3650,
+    'notifyBeforeExpirationDays' => null,
 ];
 
