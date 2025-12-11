@@ -32,8 +32,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install ImageMagick PHP extension
 RUN pecl install imagick && docker-php-ext-enable imagick
 
-# Enable Apache modules
-RUN a2enmod rewrite headers
+# Enable Apache modules and fix MPM conflict
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite headers
 
 # Configure Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
