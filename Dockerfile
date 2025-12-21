@@ -33,7 +33,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Enable Apache modules and fix MPM conflict
-RUN a2dismod mpm_event mpm_worker || true \
+# First disable ALL MPM modules, then enable only prefork
+RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true \
     && a2enmod mpm_prefork rewrite headers
 
 # Configure Apache
