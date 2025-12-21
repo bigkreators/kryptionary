@@ -67,8 +67,11 @@ RUN echo "upload_max_filesize = 100M" >> "$PHP_INI_DIR/php.ini" \
 
 EXPOSE 80
 
-# Startup script to configure PORT at runtime
+# Startup script to configure PORT at runtime and ensure single MPM
 RUN echo '#!/bin/bash\n\
+rm -f /etc/apache2/mods-enabled/mpm_*.conf /etc/apache2/mods-enabled/mpm_*.load\n\
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/\n\
+ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/\n\
 sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/ports.conf\n\
 sed -i "s/:80/:${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf\n\
 exec apache2-foreground' > /start.sh && chmod +x /start.sh
